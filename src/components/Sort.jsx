@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-
-const Sort = () => {
-  const [sort, setSort] = useState(0);
-  const [visible, setVisible] = useState(false);
-  const sortArr = ['популярности', 'цене', 'алфавиту'];
-  const onSetSort = (index) => {
-    setSort(index);
+const Sort = ({ sort, setSort, visible, setVisible }) => {
+  const sortArr = [
+    { id: 1, title: 'популярности', path: 'rating' },
+    { id: 2, title: 'цене', path: 'price' },
+    { id: 3, title: 'алфавиту', path: 'title' },
+  ];
+  const onChangeSort = ({ id, title, path }) => {
+    setSort({ id, title, path });
     setVisible(!visible);
   };
   return (
@@ -23,13 +23,15 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setVisible(!visible)}>{sortArr[sort]}</span>
+        <span onClick={() => setVisible(!visible)}>{sort.title}</span>
       </div>
       {visible && (
         <div className="sort__popup">
           <ul>
             {sortArr.map((i, index) => (
-              <li onClick={() => onSetSort(index)}>{i}</li>
+              <li onClick={() => onChangeSort(i)} key={i.id}>
+                {i.title}
+              </li>
             ))}
           </ul>
         </div>

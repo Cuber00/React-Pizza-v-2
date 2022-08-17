@@ -12,6 +12,9 @@
 
     b {
       margin-right: 8px;
+      @media(max-width:1310px){
+        display: none;
+      }
     }
 
     span {
@@ -19,6 +22,8 @@
       border-bottom: 1px dashed $orange;
       cursor: pointer;
     }
+    
+
   }
 
   &__popup {
