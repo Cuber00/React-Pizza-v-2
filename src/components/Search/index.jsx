@@ -1,5 +1,13 @@
 import cl from './style.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeValue } from '../../redux/slice/searchSlice';
 const Search = () => {
+  const searchValue = useSelector((state) => state.searchSlice.value);
+  const dispatch = useDispatch();
+  console.log(searchValue);
+  const changeInputValue = (e) => {
+    dispatch(changeValue(e.target.value));
+  };
   return (
     <div className={cl.root}>
       <label htmlFor="input-search">
@@ -17,7 +25,14 @@ const Search = () => {
           />
         </svg>
       </label>
-      <input className={cl.input} id="input-search" type="text" placeholder="Поиск по пиццам.." />
+      <input
+        className={cl.input}
+        id="input-search"
+        type="text"
+        placeholder="Поиск по пиццам.."
+        value={searchValue}
+        onChange={(e) => changeInputValue(e)}
+      />
     </div>
   );
 };
